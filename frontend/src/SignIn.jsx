@@ -1,6 +1,8 @@
+import NavBar from "./NavBar.jsx"
 const SignIn = () => {
     return (
         <div className="flex justify-center" >
+            <NavBar/>
             <div className="border-2 w-100 flex flex-col">
                 <h1 className="flex items-center flex-col mt-10 gap-5">SignIN</h1>
                 <p className=" flex items-center flex-col mt-5 gap-1">access your account</p>
@@ -31,6 +33,7 @@ const SignIn = () => {
                     <p>already have an account?<span className="text-blue-500">create one here</span></p>
                 </div>
             </div>
+        
 
         </div>
     )
