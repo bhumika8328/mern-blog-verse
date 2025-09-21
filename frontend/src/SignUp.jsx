@@ -7,23 +7,24 @@ import { useState } from "react"
 import { Lock } from 'lucide-react';
 
 const SignUp = () => {
-    const [FormData, setFormdata] = useState({
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
+    const [FormData, setFormData] = useState({
         fullName: "",
         email: "",
         password: "",
         confirmPassword: ""
     });
+
     const [errors, setErrors] = useState({
         fullName: "",
         email: "",
         password: "",
         confirmPassword: ""
     })
-    const [ShowPassword, setShowPassword] = useState(false)
-    const [ShowConfirmPassword, SetShowConfirmPassword] = useState(false)
-    const [error, SetError] = useState("")
-    const [success, setSuccess] = useState("")
-
+    const [ShowPassword, setShowPassword] = useState(false);
+    const [ShowConfirmPassword, SetShowConfirmPassword] = useState(false);
+   
     const handlePassword = () => {
         setShowPassword((Password) => !Password)
     }
@@ -65,13 +66,14 @@ const SignUp = () => {
         else {
             setSuccess("your account has been created successfully")
         }
-        setFormdata({
+        setFormData({
             fullName: "",
             email: "",
             password: "",
             confirmPassword: ""
         }
-        )
+        );
+        event.target.terms.checked=false;
         //         if (!FormData.fullName || FormData.password || FormData.confirmPassword) {
         //             SetError("please fill all")
         //         }
@@ -89,101 +91,102 @@ const SignUp = () => {
         //         confirmPassword: ""
         //     })
     }
-        return (
-            <div className="flex items-center flex-col  gap-5">
-                <NavBar />
-                <h1 className="text-3xl text-blue-600 font-bold">join BlogVerse</h1>
-                <p className="text-gray-600 text-center text-2x1"></p>
-                <p>create your account and start your blogging journey tday</p>
-                <form onSubmit={handleSubmit} className="border-black w-1/3 p-7 border-1 items-center">
+    return (
+        <div className="flex items-center flex-col  gap-5 text-md md:1/3">
+            <NavBar />
+            <div></div>
+            <h1 className="text-3xl text-blue-600 font-bold">join BlogVerse</h1>
+            <p className="text-gray-600 text-center text-2x1 text-md md:1/3"></p>
+            <p className="text-md md:1/3 ">create your account and start your blogging journey to day</p>
+            <form onSubmit={handleSubmit} className="border-black text-md md:w-1/3 p-7 border-1 items-center">
 
 
-                    <div className="w-[90%]" >
-                        {/* <div className="w-[90%]"></div>
+                <div className="text md md:1/3" >
+                    {/* <div className="w-[90%]"></div>
                 <p className="text-md text-gray-700"></p> */}
-                        <p>Full Name</p>
-                        <input
-                            value={FormData.fullName}
-                            onChange={handleChange}
-                            name="fullName"
-                            type="text"
-                            placeholder="enter your full name " className="border-1 w-full border-1gray-700 px-4  py-3 rounded-2x1 focus: outline-none focus border-purple-500" />
-                        {errors.fullName && <p className="text-red-500">{errors.fullName}</p>}
-                    </div>
+                    <p>Full Name</p>
+                    <input
+                        value={FormData.fullName}
+                        onChange={handleChange}
+                        name="fullName"
+                        type="text"
+                        placeholder="enter your full name " className="border-1 text-md md:w-1/3 border-1gray-700 px-4  py-3 rounded-2x1 focus: outline-none focus border-purple-500 rounded-xl" />
+                    {errors.fullName && <p className="text-red-500">{errors.fullName}</p>}
+                </div>
 
-                    <div className="w-[90%]" >
-                        {/* <div className="w-[90%]"></div>
+                <div className="text-md md;1/3 " >
+                    {/* <div className="w-[90%]"></div>
                 <p className="text-md text-gray-700"></p> */}
-                        <p>email</p>
-                        <input
-                            value={FormData.email}
-                            onChange={handleChange}
-                            name="email"
-                            type="email"
-                            placeholder="enter your email " className="border-1 w-full border-1gray-700 px-4 py-3 rounded-2x1 focus: outline-none focus border-purple-500" />
-                        {errors.email && <p className="text-red-500">errors.email</p>}
-                    </div>
+                    <p>email</p>
+                    <input
+                        value={FormData.email}
+                        onChange={handleChange}
+                        name="email"
+                        type="email"
+                        placeholder="enter your email " className="border-1 text-md:w-1/3 border-1gray-700 px-4 py-3 rounded-2x1 focus: outline-none focus border-purple-500 rounded-xl" />
+                    {errors.email && <p className="text-red-500">errors.email</p>}
+                </div>
 
-                    <div className="w-[90%] flex flex-col gap-2" >
-                        <p className="text-md text-gray-700 font-semibold">Password</p>
-                        <div className="relative">
-                            <Lock className="absolute top-3 left-3 text-gray-600" />
-                            <input
-                                value={FormData.confirmPassword}
-                                onChange={handleChange}
-                                name="confirmPassword"
-                                type={ShowPassword ? "text" : 'password'}
-                                placeholder="enter your password"
-                                className=" pl-10 border-1 w-full border-gray-700 px-4 py-3 rounded-2xl focus:outline-none focus:border-purple-500" />
-                            <p onClick={handlePassword}>
-                                {ShowPassword ? <Eye className="absolute right-4 top-3  text-gray-600" /> : <EyeOff className="absolute right-4 top-3  text-gray-600" />}
-
-                            </p>
-
-                        </div>
-                        {errors.email && <p className="text-red-500">errors.confirmPassword</p>}
-                    </div>
-
-                    <div className="w-[90%] flex flex-col gap-2" >
-                        <p className="text-md text-gray-700 font-semibold">Confirm your  Password </p>
-                        <div className="relative">
-                            <Lock className="absolute top-3 left-3 text-gray-600" />
-                            <input
-                                value={FormData.password}
-                                onChange={handleChange}
-                                name="password"
-                                type={ShowConfirmPassword ? "text" : 'password'}
-                                placeholder="Confirm your password"
-                                className=" pl-10 border-1 w-full border-gray-700 px-4 py-3 rounded-2xl focus:outline-none focus:border-purple-500" />
-                            <p onClick={handleConfirmPassword}>
-                                {ShowConfirmPassword ? <Eye className="absolute right-4 top-3  text-gray-600" /> : <EyeOff className="absolute right-4 top-3  text-gray-600" />}
-                            </p>
-                            {errors.email && <p className="text-red-500">errors.PASSWORD</p>}
-
-                        </div>
-                    </div>
-
-
-
-
-                    <div>
+                <div className="text-md md:1/3 flex flex-col gap-2" >
+                    <p className="text-md text-gray-700 font-semibold">Password</p>
+                    <div className="relative">
+                        <Lock className="absolute top-3 left-3 text-gray-600" />
                         <input
                             value={FormData.confirmPassword}
                             onChange={handleChange}
                             name="confirmPassword"
-                            type="check box name=" />
-                        <p>i agree to the terms of service and privacy of policy</p>
-                    </div>
-                    <div className="flex gap-2 border-1  border-gray-800 w-[90%] py-5 px-4 rounded=xl items-center justify content ">
-                        <input type="check box" id=""
-                            className="h-5 w-5" />
-                        <p>i agree to the terms of service and privacy of policy</p>
+                            type={ShowPassword ? "text" : 'password'}
+                            placeholder="enter your password"
+                            className=" pl-10 border-1 w-full border-gray-700 px-4 py-3 rounded-2xl focus:outline-none focus:border-purple-500" />
+                        <p onClick={handlePassword}>
+                            {ShowPassword ? <Eye className="absolute right-4 top-3  text-gray-600" /> : <EyeOff className="absolute right-4 top-3  text-gray-600" />}
+
+                        </p>
 
                     </div>
-                    {error && <p className="text-red-500">{error}</p>}
-                    {success && <p className="text-green-600">{success}</p>}
-                    SetError("")
-                    {/* setFormData({
+                    {errors.email && <p className="text-red-500">errors.confirmPassword</p>}
+                </div>
+
+                <div className="text-md md:w-1/3 flex flex-col gap-2" >
+                    <p className="text-md text-gray-700 font-semibold">Confirm your  Password </p>
+                    <div className="relative">
+                        <Lock className="absolute top-3 left-3 text-gray-600" />
+                        <input
+                            value={FormData.password}
+                            onChange={handleChange}
+                            name="password"
+                            type={ShowConfirmPassword ? "text" : 'password'}
+                            placeholder="Confirm your password"
+                            className=" pl-10 border-1 w-full border-gray-700 px-4 py-3 rounded-2xl focus:outline-none focus:border-purple-500 text-md:w-1/3" />
+                        <p onClick={handleConfirmPassword}>
+                            {ShowConfirmPassword ? <Eye className="absolute right-4 top-3  text-gray-600" /> : <EyeOff className="absolute right-4 top-3  text-gray-600 text-md md:w-1/3" />}
+                        </p>
+                        {errors.email && <p className="text-red-500">errors.PASSWORD</p>}
+
+                    </div>
+                </div>
+
+
+
+
+                <div>
+                    <input
+                        value={FormData.confirmPassword}
+                        onChange={handleChange}
+                        name="confirmPassword"
+                        type="check box name=" />
+                    <p>i agree to the terms of service and privacy of policy</p>
+                </div>
+                <div className="flex gap-2 border-1  border-gray-800 text-md md:w-1/3 py-5 px-4 rounded=xl items-center justify content ">
+                    <input type="check box" id=""
+                        className="h-5  text-md md:1/3" />
+                    {/* <p>i agree to the terms of service and privacy of policy</p> */}
+
+                </div>
+                {error && <p className="text-red-500">{error}</p>}
+                {success && <p className="text-green-600">{success}</p>}
+                
+                {/* setFormData({
                     fullName: "",
                 email: "",
                 password: "",
@@ -191,16 +194,16 @@ const SignUp = () => {
 
 
 
-                    <button type="submit" className="w-[90%] bg-purple-500 py-4 text-white rounded-x1 gap-3"><CircleUserRound />create account</button>
-                    <div className="border-[0.5px] border-gray-400 w-[90%] mt-4"></div>
-                    <p>already have an account?<Link to="/Signup" className="text-purple-500"></Link></p>
-                    <button className="text-gray font-semibold hover :bg-gray-200 py-4 w-[90%] rounded -x1 cursor-pointer">back to home</button>
+                <button type="submit" className="w-full bg-purple-500 py-4 text-white rounded-x1 gap-3"><CircleUserRound />create account</button>
+                <div className="border-[0.5px] border-gray-400 w-[90%] mt-4"></div>
+                <p className="text-md md:w-1/3">already have an account?<Link to="/Signup" className="text-purple-500" ></Link></p>
+                <button className="text-gray font-semibold hover:bg-gray-200 py-4 text-md md:w-1/3 rounded -x1 cursor-pointer">back to home</button>
 
 
-                </form>
-            </div>
-        )
-    
+            </form>
+        </div>
+    )
+
 }
 
-    export default SignUp
+export default SignUp
